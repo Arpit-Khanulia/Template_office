@@ -48,15 +48,25 @@ const RegisterScreen = () => {
         <form onSubmit={handleSubmit} >
 
             <input name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded" type="text" placeholder="Name" />
+            <div className="text-red-500 text-xs mt-1">
             {errors.name && touched.name ? (<p>{errors.name}</p>) :null}
+            </div>
             <input name="username" value={values.username} onChange={handleChange} onBlur={handleBlur} className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Username" />
+            <div className="text-red-500 text-xs mt-1">
             {errors.username && touched.username ? (<p>{errors.username}</p>) :null}
+            </div>
             <input name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Email Address" />
+            <div className="text-red-500 text-xs mt-1">
             {errors.email && touched.email ? (<p>{errors.email}</p>) :null}
+            </div>
             <input name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" placeholder="Password" />
+            <div className="text-red-500 text-xs mt-1">
             {errors.password && touched.password ? (<p>{errors.password}</p>) :null}
+            </div>
             <input name="confirmpassword" value={values.confirmpassword} onChange={handleChange} onBlur={handleBlur} className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" placeholder="Confirm Password" />
+            <div className="text-red-500 text-xs mt-1">
             {errors.confirmpassword && touched.confirmpassword ? (<p>{errors.confirmpassword}</p>) :null}
+            </div>
             <div className="mt-4 flex justify-between font-semibold text-sm">
               <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
                 <input className="mr-1" type="checkbox" />
