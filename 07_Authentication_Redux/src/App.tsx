@@ -3,7 +3,7 @@ import LoginScreen from "./screen/LoginScreen"
 import RegisterScreen from "./screen/RegisterScreen"
 import HomeScreen from "./screen/HomeScreen"
 import Payment from "./Components/Payment"
-import Tempredux from "./Components/tempredux"
+import Tempredux from "./Components/Tempredux"
 
 
 const App = () => {
