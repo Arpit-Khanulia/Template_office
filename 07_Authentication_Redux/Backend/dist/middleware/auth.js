@@ -30,8 +30,9 @@ dotenv.config();
 const accessSecret = process.env.ACCESS_SECRET || '';
 // Authenticator middleware
 const authenticator = (req, res, next) => {
-    // const accessToken = req.cookies.accessToken;
-    const accessToken = req.cookies.accessToken || localStorage.getItem('accessToken');
+    const accessToken = req.cookies.accessToken;
+    // const authHeader = req.headers['authorization'];
+    // const accessToken = authHeader && authHeader.split(' ')[1];
     if (!accessToken) {
         return res.status(401).send('Access token not found');
     }

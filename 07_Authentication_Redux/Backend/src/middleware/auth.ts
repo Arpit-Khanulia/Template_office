@@ -10,8 +10,11 @@ const accessSecret: string = process.env.ACCESS_SECRET || '';
 
 
 const authenticator = (req: Request, res: Response, next: NextFunction) => {
-    // const accessToken = req.cookies.accessToken;
-    const accessToken = req.cookies.accessToken || localStorage.getItem('accessToken');
+    const accessToken = req.cookies.accessToken;
+
+
+    // const authHeader = req.headers['authorization'];
+    // const accessToken = authHeader && authHeader.split(' ')[1];
     
     
     if (!accessToken) {

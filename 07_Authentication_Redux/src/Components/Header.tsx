@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 function Header() {
+
+  const handlelogout = () => {
+    localStorage.clear();
+  };
+
   return (
     <div>
       <nav className="bg-gray-800">
@@ -37,8 +42,8 @@ function Header() {
                     Transiction History
                   </Link>
 
-                  <Link
-                    to="/logout"
+                  <Link onClick={handlelogout}
+                    to="/login"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Log Out

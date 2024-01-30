@@ -46,6 +46,11 @@ const login = async (req, res) => {
         res.status(400).send('User not found');
         return;
     }
+    // Compare user email with email from the database
+    if (user.email !== req.body.email) {
+        res.status(400).send('Invalid email');
+        return;
+    }
     // Check password
     const validPassword = await bcrypt_1.default.compare(password, user.password);
     if (!validPassword) {
@@ -60,6 +65,6 @@ const login = async (req, res) => {
     res.header('Authorization', `Bearer ${accessToken}`);
     // User is authenticated
     console.log('user logged in');
-    res.status(200).json(user);
+    res.status(200).json({ user, accessToken });
 };
 exports.login = login;

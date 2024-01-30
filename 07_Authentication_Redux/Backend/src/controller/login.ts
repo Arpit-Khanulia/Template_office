@@ -37,6 +37,12 @@ const login = async (req: Request, res: Response) => {
         return;
     }
 
+    // Compare user email with email from the database
+    if (user.email !== req.body.email) {
+        res.status(400).send('Invalid email');
+        return;
+    }
+
     // Check password
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
@@ -58,7 +64,7 @@ const login = async (req: Request, res: Response) => {
     // User is authenticated
     console.log('user logged in');
     
-    res.status(200).json(user);
+    res.status(200).json({user,accessToken});
 };
 
 

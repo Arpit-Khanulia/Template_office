@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import {validationSchema} from "../Schemas";
 import { useFormik } from "formik";
+import { useRegisterMutation } from "../Redux/Slices/Auth";
+import { useNavigate } from "react-router-dom";
+
 
 interface initialValuestype  {
 
@@ -24,10 +27,24 @@ const initialValues:initialValuestype = {
 
 const RegisterScreen = () => {
 
+
+
+  const navigate = useNavigate();
+
+  const [registeruser] = useRegisterMutation();
+
+
+
   const {values,errors,touched,handleBlur,handleChange,handleSubmit} =   useFormik({
     initialValues:initialValues,
     validationSchema:validationSchema,
-    onSubmit : (values,action)=>{
+    onSubmit : async(values,action)=>{
+
+       await registeruser(values);
+       
+       navigate('/login');
+       alert('user registered');
+
        console.log(values );
        action.resetForm();
        
@@ -35,6 +52,7 @@ const RegisterScreen = () => {
   })
 
   console.log(errors);
+
   
   return (
     <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">

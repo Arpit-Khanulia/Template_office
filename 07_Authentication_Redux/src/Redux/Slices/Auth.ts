@@ -26,13 +26,17 @@ interface User {
     }[];
     __v: number;
   }
-
+  interface Transaction {
+    id: string;
+    amount: number;
+    timestamp: string;
+  }
 export const authApi = createApi({
    reducerPath: 'authApi',
    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
    tagTypes: ['Auth'],
    endpoints: (builder) => ({
-       login: builder.mutation<{ user: User }, LoginRequest>({
+       login: builder.mutation<{ user: User ,accessToken:string}, LoginRequest>({
            query: (body) => ({
                url: '/login',
                method: 'POST', 
@@ -48,6 +52,20 @@ export const authApi = createApi({
            }),
            invalidatesTags: ['Auth'],
        }),
+
+       getLastMonthData: builder.query<Transaction, void>({
+           query: () => ({
+               url: '/lastmonth',
+               method: 'GET',
+               credentials: 'include',
+           }),
+           providesTags: ['Auth'],
+       }),
+
+
+
+
+
    }),
 });
 

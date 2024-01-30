@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import {validationloginSchema} from "../Schemas";
 import { useFormik } from "formik";
 import { useEffect } from "react";
-
+import { useAppDispatch } from "../Redux/Hooks";
 import { useLoginMutation } from "../Redux/Slices/Auth";
+import { saveUserAndToken } from "../Redux/Slices/User";
 
 interface initialValuestype  {
 
@@ -23,23 +24,32 @@ const initialValues:initialValuestype = {
 
 
 const LoginScreen = () => {
+
+  const dispatch = useAppDispatch();
   
   const navigate = useNavigate();
-  const [newuser,{data:loginData,isError:isLoginError,isSuccess:isLoginSuccess,error:LoginError}] = useLoginMutation();
+  const [newuser,{data:loginData,isError:isLoginError,isSuccess:isLoginSuccess}] = useLoginMutation();
 
 
   useEffect(()=>{
     console.log('hello this is useeffect');
-    console.log(isLoginError);
-  
+
+    
+    if(isLoginError){
+      alert('Wrong Credentials')
+
+    }
   
     if(isLoginSuccess){
       console.log('user logged in successfully frontend');
-      console.log(loginData);
-      
+
+      // yaha par data store me save karna he 
+      dispatch(saveUserAndToken(loginData));
+
       navigate('/pay');
+      // alert('User Logged In Successfully')
   }
-},[isLoginSuccess]);
+},[isLoginSuccess,isLoginError]);
 
 
 
@@ -49,11 +59,9 @@ const LoginScreen = () => {
     onSubmit : async(values,action)=>{
 
        console.log(values );
+       console.log(`this is issuccess before ${isLoginSuccess} yoo`)
        await newuser(values);
-
-       
-
-
+       console.log(`this is issuccess after ${isLoginSuccess} yoo`)
        action.resetForm();
        
     }
@@ -98,7 +106,7 @@ const LoginScreen = () => {
 
         </form>
         <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-          Already have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/login">Register</Link>
+          Already have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/register">Register</Link>
         </div>
       </div>
     </section>
