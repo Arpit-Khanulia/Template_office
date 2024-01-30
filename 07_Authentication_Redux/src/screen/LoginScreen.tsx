@@ -32,8 +32,6 @@ const LoginScreen = () => {
 
 
   useEffect(()=>{
-    console.log('hello this is useeffect');
-
     
     if(isLoginError){
       alert('Wrong Credentials')
@@ -59,9 +57,7 @@ const LoginScreen = () => {
     onSubmit : async(values,action)=>{
 
        console.log(values );
-       console.log(`this is issuccess before ${isLoginSuccess} yoo`)
        await newuser(values);
-       console.log(`this is issuccess after ${isLoginSuccess} yoo`)
        action.resetForm();
        
     }

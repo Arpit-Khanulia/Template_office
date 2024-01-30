@@ -30,14 +30,14 @@ dotenv.config();
 const accessSecret = process.env.ACCESS_SECRET || '';
 // Authenticator middleware
 const authenticator = (req, res, next) => {
-    const accessToken = req.cookies.accessToken;
-    // const authHeader = req.headers['authorization'];
-    // const accessToken = authHeader && authHeader.split(' ')[1];
+    // const accessToken = req.cookies.accessToken;
+    const accessToken = req.header('authorization');
+    // console.log(`This is my token ${accessToken}`);
     if (!accessToken) {
         return res.status(401).send('Access token not found');
     }
     try {
-        const decoded = (0, jsonwebtoken_1.verify)(accessToken, accessSecret);
+        const decoded = (0, jsonwebtoken_1.verify)(accessToken.replace('Bearer ', ''), accessSecret);
         const userdata = decoded;
         req.id = userdata.id;
         next();

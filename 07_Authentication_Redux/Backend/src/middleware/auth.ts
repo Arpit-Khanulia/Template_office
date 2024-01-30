@@ -10,18 +10,20 @@ const accessSecret: string = process.env.ACCESS_SECRET || '';
 
 
 const authenticator = (req: Request, res: Response, next: NextFunction) => {
-    const accessToken = req.cookies.accessToken;
+    // const accessToken = req.cookies.accessToken;
 
-
-    // const authHeader = req.headers['authorization'];
-    // const accessToken = authHeader && authHeader.split(' ')[1];
+    
+    const accessToken =  req.header('authorization');
+    // console.log(`This is my token ${accessToken}`);
+    
     
     
     if (!accessToken) {
         return res.status(401).send('Access token not found');
     }
     try {
-        const decoded = verify(accessToken, accessSecret);
+        const decoded = verify(accessToken.replace('Bearer ', ''), accessSecret);
+        
 
         
         const userdata :any = decoded;

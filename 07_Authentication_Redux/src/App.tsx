@@ -3,6 +3,7 @@ import LoginScreen from "./screen/LoginScreen"
 import RegisterScreen from "./screen/RegisterScreen"
 import HomeScreen from "./screen/HomeScreen"
 import Payment from "./Components/Payment"
+import TransitionHistory from "./screen/TransitionHistory"
 
 
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/register"  element={<RegisterScreen/> } />
           <Route path="/" element = {<HomeScreen/>}>
            <Route path="/pay" element={<Payment/>} /> 
+           <Route path="/lastmonth" element={<TransitionHistory/>} /> 
           </Route>
           
     

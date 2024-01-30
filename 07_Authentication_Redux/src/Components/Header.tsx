@@ -35,12 +35,15 @@ function Header() {
                     View Balance
                   </Link>
 
-                  <Link
-                    to="/transictionhistory"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Transiction History
-                  </Link>
+                  <div className="dropdown">
+                  <div tabIndex={0} role="button" className="btn m-1">Transition History</div>
+                  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><Link to='/lasthour' >Last Hour</Link></li>
+                    <li><Link to='/lastday' >Last Day</Link></li>
+                    <li><Link to='/lastmonth' >Last Month</Link></li>
+                    <li><Link to='/lastyear' >Last Year</Link></li>
+                  </ul>
+                </div>
 
                   <Link onClick={handlelogout}
                     to="/login"

@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const accessToken = localStorage.getItem('accessToken') || null;
+
+
 // Define the interface for the user data
 interface UserData {
     _id: string;
@@ -17,8 +20,8 @@ interface UserData {
   
   // Define the interface for the response object
   interface UserResponse {
-    user: UserData;
-    accessToken: string;
+    user: UserData ;
+    accessToken: string|null;
   }
 
   // Define the initial state with blank data
@@ -32,7 +35,7 @@ const initialState: UserResponse = {
       transition: [],
       __v: 0
     },
-    accessToken: ""
+    accessToken: accessToken
   };
 
  const authUser = createSlice({
@@ -42,10 +45,11 @@ const initialState: UserResponse = {
     reducers:{
 
         saveUserAndToken: (state, action) => {
-            state.user = action.payload.user;
-            state.accessToken = action.payload.accessToken;
             localStorage.setItem('user', JSON.stringify(action.payload.user));
             localStorage.setItem('accessToken', action.payload.accessToken);
+            state.user = action.payload.user;
+            state.accessToken = action.payload.accessToken;
+          
         }
     }
 })

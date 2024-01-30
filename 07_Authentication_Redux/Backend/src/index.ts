@@ -6,11 +6,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 
-
-
-
-
-
 declare global {
     namespace Express {
         interface Request {

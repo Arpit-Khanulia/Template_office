@@ -1,6 +1,12 @@
-
+import { useAppSelector } from "../Redux/Hooks";
+import { RootState } from "../Redux/Store";
 
 const Payment = () => {
+
+  const data = useAppSelector((state:RootState)=>state.saveUserAndToken);
+  
+  console.log(data);
+  
     return (
       <div className="relative mx-auto w-full bg-white ">
         <div className="grid min-h-screen grid-cols-10">
@@ -19,7 +25,7 @@ const Payment = () => {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="john.capler@fang.com"
+                    placeholder="username"
                     className="mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-500"
                   />
                 </div>
@@ -47,7 +53,7 @@ const Payment = () => {
                     type="text"
                     id="card-name"
                     name="card-name"
-                    placeholder="Name on the card"
+                    placeholder="Amount"
                     className="mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-gray-500"
                   />
                 </div>
